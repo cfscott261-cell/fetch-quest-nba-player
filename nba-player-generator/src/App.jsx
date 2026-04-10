@@ -23,6 +23,27 @@ function App() {
     "Derrick Rose",
   ]
 
+  const playerImageMap = {
+    "Allen Iverson": new URL("./assets/player-pics/allen_iverson.jpg", import.meta.url).href,
+    "Chris Paul": new URL("./assets/player-pics/chris_paul.jpg", import.meta.url).href,
+    "Derrick Rose": new URL("./assets/player-pics/derrick_rose.jpg", import.meta.url).href,
+    "Dirk Nowitzki": new URL("./assets/player-pics/dirk_nowitzki.jpg", import.meta.url).href,
+    "Grant Hill": new URL("./assets/player-pics/grant_hill.jpg", import.meta.url).href,
+    "Kawhi Leonard": new URL("./assets/player-pics/kawhi_leonard.jpg", import.meta.url).href,
+    "Kevin Durant": new URL("./assets/player-pics/kevin_durant.jpg", import.meta.url).href,
+    "Kevin Garnett": new URL("./assets/player-pics/kevin_garnett.jpg", import.meta.url).href,
+    "Kobe Bryant": new URL("./assets/player-pics/kobe_bryant.jpg", import.meta.url).href,
+    "Larry Bird": new URL("./assets/player-pics/larry_bird.jpg", import.meta.url).href,
+    "LeBron James": new URL("./assets/player-pics/lebron_james.jpg", import.meta.url).href,
+    "Magic Johnson": new URL("./assets/player-pics/magic_johnson.jpg", import.meta.url).href,
+    "Michael Jordan": new URL("./assets/player-pics/michael_jordan.jpg", import.meta.url).href,
+    "Penny Hardaway": new URL("./assets/player-pics/penny_hardaway.jpg", import.meta.url).href,
+    "Shaquille O'Neal": new URL("./assets/player-pics/shaq_oneal.jpg", import.meta.url).href,
+    "Stephen Curry": new URL("./assets/player-pics/steph_curry.jpg", import.meta.url).href,
+    "Tim Duncan": new URL("./assets/player-pics/tim_duncan.jpg", import.meta.url).href,
+    "Tracy McGrady": new URL("./assets/player-pics/tracy_mcgrady.jpg", import.meta.url).href,
+  }
+
   const [player, setPlayer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
@@ -60,51 +81,28 @@ function App() {
     fetchPlayer()
   }, [])
 
-  
-  const getImagePath = (name) => {
-  return new URL(`./assets/player-pics/${name.toLowerCase().replaceAll(" ", "_")}.jpg`, import.meta.url).href
-}
-
   return (
     <div className="app">
       <div className="card">
         <h1>NBA Player Spotlight</h1>
 
         {loading && <p>Loading player data...</p>}
-
         {error && <p>{error}</p>}
 
         {!loading && !error && player && (
           <>
-            {/* 🖼️ Player Image */}
             <img
-              src={getImagePath(player.strPlayer)}
+              src={playerImageMap[player.strPlayer]}
               alt={player.strPlayer}
               className="player-img"
-              onError={(e) => {
-                e.target.src = "https://via.placeholder.com/150"
-              }}
             />
 
             <h2>{player.strPlayer}</h2>
 
-            <p>
-              <strong>Team:</strong> {player.strTeam || "Not available"}
-            </p>
-
-            <p>
-              <strong>Nationality:</strong>{" "}
-              {player.strNationality || "Not available"}
-            </p>
-
-            <p>
-              <strong>Sport:</strong> {player.strSport || "Not available"}
-            </p>
-
-            <p>
-              <strong>Birth Date:</strong>{" "}
-              {player.dateBorn || "Not available"}
-            </p>
+            <p><strong>Team:</strong> {player.strTeam || "Not available"}</p>
+            <p><strong>Nationality:</strong> {player.strNationality || "Not available"}</p>
+            <p><strong>Sport:</strong> {player.strSport || "Not available"}</p>
+            <p><strong>Birth Date:</strong> {player.dateBorn || "Not available"}</p>
           </>
         )}
 

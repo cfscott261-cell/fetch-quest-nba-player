@@ -39,3 +39,13 @@ h1 {
   line-height: 1.2;
   margin-bottom: 15px;
 }
+
+.player-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto 16px;
+}

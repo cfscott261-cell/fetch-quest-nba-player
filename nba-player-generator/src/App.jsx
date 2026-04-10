@@ -1,4 +1,4 @@
-import { useState} from "react"
+import { useState, useEffect} from "react"
 import "./App.css"
 
 function App() {
@@ -25,16 +25,48 @@ function App() {
     
   ]
 const [player, setPlayer] = useState(null)
-const [loading, setLoading] = useState(true)
-const [error, setError] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
+  const fetchPlayer = async () => {
+    try {
+      setLoading(true)
+      setError("")
+
+      const randomName =
+        playerNames[Math.floor(Math.random() * playerNames.length)]
+
+      const formattedName = randomName.replaceAll(" ", "_")
+
+      const response = await fetch(
+        `https://www.thesportsdb.com/api/v1/json/123/searchplayers.php?p=${formattedName}`
+      )
+
+      const data = await response.json()
+
+      if (!data.player || data.player.length === 0) {
+        throw new Error("No player found")
+      }
+
+      setPlayer(data.player[0])
+    } catch (err) {
+      setError("Could not load player data.")
+      setPlayer(null)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchPlayer()
+  }, [])
 
   return (
-  <div>
-    <h1>NBA Player Spotlight</h1>
-    <p>Total players: {playerNames.length}</p>
-  </div>
-)
+    <div>
+      <h1>NBA Player Spotlight</h1>
+      <p>App is loading player data...</p>
+    </div>
+  )
 }
 
 export default App

@@ -60,6 +60,11 @@ function App() {
     fetchPlayer()
   }, [])
 
+  
+  const getImagePath = (name) => {
+  return new URL(`./assets/player-pics/${name.toLowerCase().replaceAll(" ", "_")}.jpg`, import.meta.url).href
+}
+
   return (
     <div className="app">
       <div className="card">
@@ -71,11 +76,35 @@ function App() {
 
         {!loading && !error && player && (
           <>
+            {/* 🖼️ Player Image */}
+            <img
+              src={getImagePath(player.strPlayer)}
+              alt={player.strPlayer}
+              className="player-img"
+              onError={(e) => {
+                e.target.src = "https://via.placeholder.com/150"
+              }}
+            />
+
             <h2>{player.strPlayer}</h2>
-            <p><strong>Team:</strong> {player.strTeam || "Not available"}</p>
-            <p><strong>Nationality:</strong> {player.strNationality || "Not available"}</p>
-            <p><strong>Sport:</strong> {player.strSport || "Not available"}</p>
-            <p><strong>Birth Date:</strong> {player.dateBorn || "Not available"}</p>
+
+            <p>
+              <strong>Team:</strong> {player.strTeam || "Not available"}
+            </p>
+
+            <p>
+              <strong>Nationality:</strong>{" "}
+              {player.strNationality || "Not available"}
+            </p>
+
+            <p>
+              <strong>Sport:</strong> {player.strSport || "Not available"}
+            </p>
+
+            <p>
+              <strong>Birth Date:</strong>{" "}
+              {player.dateBorn || "Not available"}
+            </p>
           </>
         )}
 

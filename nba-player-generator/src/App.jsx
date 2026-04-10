@@ -1,8 +1,7 @@
-import { useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import "./App.css"
 
 function App() {
-
   const playerNames = [
     "Michael Jordan",
     "LeBron James",
@@ -22,9 +21,9 @@ function App() {
     "Dirk Nowitzki",
     "Chris Paul",
     "Derrick Rose",
-    
   ]
-const [player, setPlayer] = useState(null)
+
+  const [player, setPlayer] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
@@ -36,7 +35,7 @@ const [player, setPlayer] = useState(null)
       const randomName =
         playerNames[Math.floor(Math.random() * playerNames.length)]
 
-      const formattedName = randomName.replaceAll(" ", "_")
+      const formattedName = encodeURIComponent(randomName)
 
       const response = await fetch(
         `https://www.thesportsdb.com/api/v1/json/123/searchplayers.php?p=${formattedName}`
@@ -62,9 +61,26 @@ const [player, setPlayer] = useState(null)
   }, [])
 
   return (
-    <div>
-      <h1>NBA Player Spotlight</h1>
-      <p>App is loading player data...</p>
+    <div className="app">
+      <div className="card">
+        <h1>NBA Player Spotlight</h1>
+
+        {loading && <p>Loading player data...</p>}
+
+        {error && <p>{error}</p>}
+
+        {!loading && !error && player && (
+          <>
+            <h2>{player.strPlayer}</h2>
+            <p><strong>Team:</strong> {player.strTeam || "Not available"}</p>
+            <p><strong>Nationality:</strong> {player.strNationality || "Not available"}</p>
+            <p><strong>Sport:</strong> {player.strSport || "Not available"}</p>
+            <p><strong>Birth Date:</strong> {player.dateBorn || "Not available"}</p>
+          </>
+        )}
+
+        <button onClick={fetchPlayer}>Show Another Player</button>
+      </div>
     </div>
   )
 }

@@ -36,12 +36,32 @@ function App() {
     "Larry Bird": new URL("./assets/player-pics/larry_bird.jpg", import.meta.url).href,
     "LeBron James": new URL("./assets/player-pics/lebron_james.jpg", import.meta.url).href,
     "Magic Johnson": new URL("./assets/player-pics/magic_johnson.jpg", import.meta.url).href,
-    "Michael Jordan": new URL("./assets/player-pics/michael_jordan.jpg", import.meta.url).href,
     "Penny Hardaway": new URL("./assets/player-pics/penny_hardaway.jpg", import.meta.url).href,
     "Shaquille O'Neal": new URL("./assets/player-pics/shaq_oneal.jpg", import.meta.url).href,
     "Stephen Curry": new URL("./assets/player-pics/steph_curry.jpg", import.meta.url).href,
     "Tim Duncan": new URL("./assets/player-pics/tim_duncan.jpg", import.meta.url).href,
     "Tracy McGrady": new URL("./assets/player-pics/tracy_mcgrady.jpg", import.meta.url).href,
+  }
+
+  const playerDetails = {
+    "Michael Jordan": { hometown: "Brooklyn, New York", championships: 6 },
+    "LeBron James": { hometown: "Akron, Ohio", championships: 4 },
+    "Kobe Bryant": { hometown: "Philadelphia, Pennsylvania", championships: 5 },
+    "Shaquille O'Neal": { hometown: "Newark, New Jersey", championships: 4 },
+    "Magic Johnson": { hometown: "Lansing, Michigan", championships: 5 },
+    "Larry Bird": { hometown: "West Baden Springs, Indiana", championships: 3 },
+    "Tim Duncan": { hometown: "Saint Croix, U.S. Virgin Islands", championships: 5 },
+    "Allen Iverson": { hometown: "Hampton, Virginia", championships: 0 },
+    "Penny Hardaway": { hometown: "Memphis, Tennessee", championships: 0 },
+    "Kevin Durant": { hometown: "Washington, D.C.", championships: 2 },
+    "Stephen Curry": { hometown: "Charlotte, North Carolina", championships: 4 },
+    "Kawhi Leonard": { hometown: "Los Angeles, California", championships: 2 },
+    "Kevin Garnett": { hometown: "Greenville, South Carolina", championships: 1 },
+    "Grant Hill": { hometown: "Dallas, Texas", championships: 0 },
+    "Tracy McGrady": { hometown: "Bartow, Florida", championships: 0 },
+    "Dirk Nowitzki": { hometown: "Würzburg, Germany", championships: 1 },
+    "Chris Paul": { hometown: "Winston-Salem, North Carolina", championships: 0 },
+    "Derrick Rose": { hometown: "Chicago, Illinois", championships: 0 }
   }
 
   const [player, setPlayer] = useState(null)
@@ -100,9 +120,9 @@ function App() {
             <h2>{player.strPlayer}</h2>
 
             <p><strong>Team:</strong> {player.strTeam || "Not available"}</p>
-            <p><strong>Nationality:</strong> {player.strNationality || "Not available"}</p>
-            <p><strong>Sport:</strong> {player.strSport || "Not available"}</p>
-            <p><strong>Birth Date:</strong> {player.dateBorn || "Not available"}</p>
+            <p><strong>Position:</strong> {player.strPosition || "Not available"}</p>
+            <p><strong>Hometown:</strong> {playerDetails[player.strPlayer]?.hometown || "Not available"}</p>
+            <p><strong>Championships:</strong> {playerDetails[player.strPlayer]?.championships ?? "Not available"}</p>
           </>
         )}
 

@@ -1,16 +1,18 @@
-# React + Vite
+# NBA Player Spotlight
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+NBA Player Spotlight is a React application that fetches player data from a public API and displays key information such as team, position, hometown, and championships. Users can click a button to generate a new random player.
 
-Currently, two official plugins are available:
+## API Used
+TheSportsDB API  
+https://www.thesportsdb.com/api.php
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## How to Run Locally
+1. Clone the repository
+2. Navigate to the project folder
+3. Run `npm install`
+4. Run `npm run dev`
+5. Open the local development link in your browser
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technical Challenge
+One challenge I encountered was matching API player names with local image files. To fix this I created a mapping between player names and image paths to make sure the correct images displayed for each player. I also had some trouble displaying stats and team since some of my players are retired.
